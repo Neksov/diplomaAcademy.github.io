@@ -60,7 +60,7 @@ const tabs = () =>{
         const toggleTabContent = (index) =>{
           for(let i=0; i < panelHeading.length; i++){
             if(index === i){
-              panelHeading[i].classList.remove('d-none');//добавляем класс active
+              panelHeading[i].classList.remove('d-none');
               collapse[i].classList.add('in'); 
             }else{
               panelHeading[i].classList.add('d-none');
@@ -71,17 +71,16 @@ const tabs = () =>{
 
   panelGroup.forEach((e) =>{
     e.addEventListener('click', (event) =>{ 
-      let target = event.target; //записываем в таргет элемент на котором произошло событие.
-      target = target.closest('.panel-heading');// проверяем есть ли утаргета селектор .service-header-tab, если нет то подымается вверх пока не найдет, либо null 
+      let target = event.target;
+      target = target.closest('.panel-heading'); 
 
       if (target){
-        panelHeading.forEach((item, i ) =>{ // колбэк функция принимает 2 аргумента
+        panelHeading.forEach((item, i ) =>{ 
         if (item === target){
-          toggleTabContent(i);//вывзов функции сраниваем индекс который получили с индексем tabContent
+          toggleTabContent(i);
         }
         });
       }
-    target = target.parentNode; //присваиваем родителя если не выполняется условие if(target.classList.contains('service-header-tab')
     })
 });
 };
