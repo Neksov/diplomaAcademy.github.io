@@ -52,30 +52,38 @@ showAll();
 
 //tabs
 const tabs = () =>{
-  const panel  = document.querySelectorAll('.panel'),
+  const panelGroup  = document.querySelectorAll('.panel-group'),
         panelHeading = document.querySelectorAll('.panel-heading'),
-        collapse = document.querySelectorAll('.collapse');
+        collapse = document.querySelectorAll('.collapse'),
+        constructBtn = document.querySelectorAll('.collapse');
 
         const toggleTabContent = (index) =>{
-          for(let i=0; i < collapse.length; i++){
+          for(let i=0; i < panelHeading.length; i++){
             if(index === i){
-              panelHeading[i].classList.add('active');//добавляем класс active
-              collapse[i].classList.remove('in'); 
-            }else{
-              panelHeading[i].classList.remove('active');
+              panelHeading[i].classList.remove('d-none');//добавляем класс active
               collapse[i].classList.add('in'); 
+            }else{
+              panelHeading[i].classList.add('d-none');
+              collapse[i].classList.remove('in'); 
             }
           }
         };
 
-        panel.forEach((elem) =>{
-          elem.addEventListener('click', (event)=>{
-            if(event.target.collapse('.collapse')){
-              elem.classList.toggle('in')
-              console.log(elem)
-            }
-          });
+  panelGroup.forEach((e) =>{
+    e.addEventListener('click', (event) =>{ 
+      let target = event.target; //записываем в таргет элемент на котором произошло событие.
+      target = target.closest('.panel-heading');// проверяем есть ли утаргета селектор .service-header-tab, если нет то подымается вверх пока не найдет, либо null 
+
+      if (target){
+        panelHeading.forEach((item, i ) =>{ // колбэк функция принимает 2 аргумента
+        if (item === target){
+          toggleTabContent(i);//вывзов функции сраниваем индекс который получили с индексем tabContent
+        }
         });
+      }
+    target = target.parentNode; //присваиваем родителя если не выполняется условие if(target.classList.contains('service-header-tab')
+    })
+});
 };
 tabs();
 }); 
