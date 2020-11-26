@@ -5,8 +5,16 @@ const sendForm = () =>{
   const captureForm = document.querySelectorAll('.capture-form'),//форма с pop-up 
         mainForm = document.querySelector('.main-form'),// форма консультация
         directorForm = document.querySelector('.director-form'),// форма вопроса
+
+        phone1 = document.getElementById('phone_1'),
+        phone11 = document.getElementById('phone_11'),
+        phone12 = document.getElementById('phone_12'),
+        phone13 = document.getElementById('phone_13'),
+        phone2 = document.getElementById('phone_2'),
+        phone3 = document.getElementById('phone_3'),
+
         input = document.querySelectorAll('input'),
-        phoneUser = document.querySelectorAll('.phone-user'),
+        phoneUser = document.querySelectorAll('input[name="user_phone'),
         userQuest = document.querySelector('[name=user_quest]'),
         userName = document.querySelectorAll('[name=user_name]'),
         popupCall = document.querySelector('.popup-call'),
@@ -26,8 +34,9 @@ let statusMessage = document.createElement('div'),//добавялем элем�
         if(target.matches('[name=user_name]') || target.matches('[name=user_quest]')){
           target.value = target.value.replace(/[^а-яё\s]/ig, ''); // ограничиваем ввод всего кроме кирилицы
         }else if(target.matches('.phone-user')){
-          target.value = target.value.replace(/[^\+\d]/g, '').substring(0,12); // ограничиваем ввод всего кроме цифр и знака + 
+          target.value = target.value.replace(/[^0-9+]/ig, '').substring(0,12);
         }
+        
       });
     });
   
@@ -39,20 +48,30 @@ let statusMessage = document.createElement('div'),//добавялем элем�
           popupCheck.style.display = 'none';//закрываем модалку
           popupConsultation.style.display = 'none';//закрываем модалку
       }, 3000);
-    }
-    phoneUser.forEach((elem)=>{
-      if(!elem.value.match(/[0-9+]{7,13}/ig)) {
-        // alert('Номер введен не верно');
-        return;
-      }
-    });
+    };
+
+    let cleaFields = () =>{ //очищаем поля в модалках
+      phoneUser.forEach((elem) =>{
+        elem.value ='';
+      });
+      userName.forEach((elem) =>{
+        elem.value ='';
+      });
+      userQuest.value ='';
+    };
 
     captureForm.forEach((elem)=>{
       elem.addEventListener('submit', (event) =>{
-        console.log(elem)
         event.preventDefault();//отменяем стандарное поведение браузера
         elem.appendChild(statusMessage);// добавляем элемент на страницу    
         elem.appendChild(load);
+
+        //проанряем введенный номер
+        if(!phone1.value.match(/[0-9+]{7,12}/ig) && !phone11.value.match(/[0-9+]{7,12}/ig) && !phone12.value.match(/[0-9+]{7,12}/ig) && !phone13.value.match(/[0-9+]{7,12}/ig) && !phone2.value.match(/[0-9+]{7,12}/ig)) {
+          alert('Номер введен не верно, повторите');
+          statusMessage.remove();//удаляем сообщение под формой
+          return;
+        }
 
         load.classList.add('sk-spinner-pulse');//вывод спинер загрузка
         
@@ -81,13 +100,75 @@ let statusMessage = document.createElement('div'),//добавялем элем�
         });
 
         //очищаем поля
-        userName.value = '';
-        phoneUser.value = '';
+        cleaFields();
         statusMessage.textContent ='';
-
       });
-    })
+    });
   
+    mainForm.addEventListener('submit', (event) =>{
+      event.preventDefault();//отменяем стандарное поведение браузера
+      mainForm.appendChild(statusMessage);// добавляем элемент на страницу    
+      mainForm.appendChild(load);
+
+      if(!phone3.value.match(/[0-9+]{7,12}/ig)) {  //проанряем введенный номер
+        alert('Номер введен не верно, повторите');
+        statusMessage.remove();//удаляем сообщение под формой
+        return;
+      }
+      load.classList.add('sk-spinner-pulse');//вывод спинер загрузка
+        
+      const formData = new FormData(mainForm);//создаем экземпляр класса и в эту функцию передаем форму с которой получаем данные
+      let body = {}; //обект в который помещаем наши данные
+
+      //для отправки JSON перебираем и записываем каждый цикл
+      formData.forEach((val, key) =>{
+        body[key] = val;
+      });
+
+      postData(body) 
+      .then((response) =>{
+        if(response.status !==200){
+          throw new Error('status network not 200');
+        }
+        load.remove(load);//удаляем прилоадер
+        statusMessage.textContent = successMessage;
+        timeOut();
+      })
+      .catch((error) =>{
+        load.remove(load);//удаляем прилоадер
+        statusMessage.textContent = errorMessage;
+        timeOut();
+        console.error(error); 
+      });
+
+      //очищаем поля
+      cleaFields();
+      statusMessage.textContent ='';
+    });
+
+    directorForm.addEventListener('submit', (event) =>{
+      event.preventDefault();//отменяем стандарное поведение браузера
+      const formData = new FormData(directorForm);//создаем экземпляр класса и в эту функцию передаем форму с которой получаем данные
+      let body = {}; //обект в который помещаем наши данные
+
+      //для отправки JSON перебираем и записываем каждый цикл
+      formData.forEach((val, key) =>{
+        body[key] = val;
+      });
+
+      postData(body) 
+      .then((response) =>{
+        if(response.status !==200){
+          throw new Error('status network not 200');
+        }
+      })
+      .catch((error) =>{
+        console.error(error); 
+      });
+
+      //очищаем поля
+      cleaFields();
+    });
 
     const postData = (body) =>{
       //запрос к серверу через fetch
