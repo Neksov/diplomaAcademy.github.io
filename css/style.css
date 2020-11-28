@@ -1,23 +1,20 @@
 @font-face {
   font-family: 'MuseoSansCyrl_reg';
-  src: url(../fonts/MuseoSansCyrl-300.eot);
-  src: url('../fonts/MuseoSansCyrl-300.eot?#iefix') format('embedded-opentype'), url(../fonts/MuseoSansCyrl-300.woff2) format('woff2'), url(../fonts/MuseoSansCyrl-300.woff) format('woff'), url(../fonts/MuseoSansCyrl-300.ttf) format('truetype'), url('../fonts/MuseoSansCyrl-300.svg#MuseoSansCyrl-300') format('svg');
+  src: url(../fonts/MuseoSansCyrl-300.woff2) format('woff2'), url(../fonts/MuseoSansCyrl-300.woff) format('woff'), url(../fonts/MuseoSansCyrl-300.ttf) format('truetype'), url('../fonts/MuseoSansCyrl-300.svg#MuseoSansCyrl-300') format('svg');
   font-weight: 300;
   font-style: normal
 }
 
 @font-face {
   font-family: 'MuseoSansCyrl_med';
-  src: url(../fonts/MuseoSansCyrl-500.eot);
-  src: url('../fonts/MuseoSansCyrl-500.eot?#iefix') format('embedded-opentype'), url(../fonts/MuseoSansCyrl-500.woff2) format('woff2'), url(../fonts/MuseoSansCyrl-500.woff) format('woff'), url(../fonts/MuseoSansCyrl-500.ttf) format('truetype'), url('../fonts/MuseoSansCyrl-500.svg#MuseoSansCyrl-500') format('svg');
+  src: url(../fonts/MuseoSansCyrl-500.woff2) format('woff2'), url(../fonts/MuseoSansCyrl-500.woff) format('woff'), url(../fonts/MuseoSansCyrl-500.ttf) format('truetype'), url('../fonts/MuseoSansCyrl-500.svg#MuseoSansCyrl-500') format('svg');
   font-weight: 500;
   font-style: normal
 }
 
 @font-face {
   font-family: 'MuseoSansCyrl_bold';
-  src: url(../fonts/MuseoSansCyrl-700.eot);
-  src: url('../fonts/MuseoSansCyrl-700.eot?#iefix') format('embedded-opentype'), url(../fonts/MuseoSansCyrl-700.woff2) format('woff2'), url(../fonts/MuseoSansCyrl-700.woff) format('woff'), url(../fonts/MuseoSansCyrl-700.ttf) format('truetype'), url('../fonts/MuseoSansCyrl-700.svg#MuseoSansCyrl-700') format('svg');
+  src: url(../fonts/MuseoSansCyrl-700.woff2) format('woff2'), url(../fonts/MuseoSansCyrl-700.woff) format('woff'), url(../fonts/MuseoSansCyrl-700.ttf) format('truetype'), url('../fonts/MuseoSansCyrl-700.svg#MuseoSansCyrl-700') format('svg');
   font-weight: 700;
   font-style: normal
 }
@@ -33,24 +30,21 @@ img {
 
 @font-face {
   font-family: 'MuseoSansCyrl_reg';
-  src: url(../fonts/MuseoSansCyrl-300.eot);
-  src: url('../fonts/MuseoSansCyrl-300.eot?#iefix') format('embedded-opentype'), url(../fonts/MuseoSansCyrl-300.woff2) format('woff2'), url(../fonts/MuseoSansCyrl-300.woff) format('woff'), url(../fonts/MuseoSansCyrl-300.ttf) format('truetype'), url('../fonts/MuseoSansCyrl-300.svg#MuseoSansCyrl-300') format('svg');
+  src: url(../fonts/MuseoSansCyrl-300.woff2) format('woff2'), url(../fonts/MuseoSansCyrl-300.woff) format('woff'), url(../fonts/MuseoSansCyrl-300.ttf) format('truetype'), url('../fonts/MuseoSansCyrl-300.svg#MuseoSansCyrl-300') format('svg');
   font-weight: 300;
   font-style: normal
 }
 
 @font-face {
   font-family: 'MuseoSansCyrl_med';
-  src: url(../fonts/MuseoSansCyrl-500.eot);
-  src: url('../fonts/MuseoSansCyrl-500.eot?#iefix') format('embedded-opentype'), url(../fonts/MuseoSansCyrl-500.woff2) format('woff2'), url(../fonts/MuseoSansCyrl-500.woff) format('woff'), url(../fonts/MuseoSansCyrl-500.ttf) format('truetype'), url('../fonts/MuseoSansCyrl-500.svg#MuseoSansCyrl-500') format('svg');
+  src: url(../fonts/MuseoSansCyrl-500.woff2) format('woff2'), url(../fonts/MuseoSansCyrl-500.woff) format('woff'), url(../fonts/MuseoSansCyrl-500.ttf) format('truetype'), url('../fonts/MuseoSansCyrl-500.svg#MuseoSansCyrl-500') format('svg');
   font-weight: 500;
   font-style: normal
 }
 
 @font-face {
   font-family: 'MuseoSansCyrl_bold';
-  src: url(../fonts/MuseoSansCyrl-700.eot);
-  src: url('../fonts/MuseoSansCyrl-700.eot?#iefix') format('embedded-opentype'), url(../fonts/MuseoSansCyrl-700.woff2) format('woff2'), url(../fonts/MuseoSansCyrl-700.woff) format('woff'), url(../fonts/MuseoSansCyrl-700.ttf) format('truetype'), url('../fonts/MuseoSansCyrl-700.svg#MuseoSansCyrl-700') format('svg');
+  src: url(../fonts/MuseoSansCyrl-700.woff2) format('woff2'), url(../fonts/MuseoSansCyrl-700.woff) format('woff'), url(../fonts/MuseoSansCyrl-700.ttf) format('truetype'), url('../fonts/MuseoSansCyrl-700.svg#MuseoSansCyrl-700') format('svg');
   font-weight: 700;
   font-style: normal
 }
@@ -439,7 +433,8 @@ header .logo img {
 .constructor .panel-group {
   width: 37rem;
   margin-left: auto;
-  margin-right: auto
+  margin-right: auto;
+  cursor: pointer;
 }
 
 .constructor .panel-heading {
@@ -455,11 +450,12 @@ header .logo img {
 .constructor .panel-heading a .link-text {
   font-family: 'MuseoSansCyrl_reg', sans-serif;
   font-size: 1.5rem;
-  margin-left: 0
+  margin-left: 0;
 }
 
 .constructor .panel-title {
   margin-top: 1rem
+
 }
 
 .constructor .tank-img {

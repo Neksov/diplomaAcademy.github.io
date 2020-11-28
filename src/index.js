@@ -17,6 +17,7 @@ import togglePopUp from './modules/togglePopUp';
 import showAll from './modules/showAll';
 import tabs from './modules/tabs';
 import sendForm from './modules/sendForm';
+import calc from './modules/calc';
 
 
 //popup
@@ -27,4 +28,7 @@ showAll();
 tabs();
 //send-Ajax-form
 sendForm();
+//calc
+calc();
+
 // new WOW().init();
