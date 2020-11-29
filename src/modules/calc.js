@@ -1,14 +1,14 @@
 const calc = () =>{
   const inputChexbox = document.querySelectorAll('[type=checkbox]'),
         hiddenSeptic = document.querySelectorAll('.hiddenSeptic'),
-        inputMetr = document.querySelector('[type = metr]'),
+        formControl = document.querySelectorAll('.form-control'),
 
-        calcResult = document.getElementById('calc-result');
-console.log(inputMetr);
+        panel = document.querySelectorAll('.panel'),
+        calcResultInput = document.getElementById('calc-result');
 
   let myonoffswitch = document.getElementById('myonoffswitch'),
-      myonoffswitchTwo = document.getElementById('myonoffswitch-two'),
-      countSept;
+      myonoffswitchTwo = document.getElementById('myonoffswitch-two');
+
 
   //сразу убираем второй колодец    
   hiddenSeptic.forEach((e) =>{ 
@@ -16,38 +16,62 @@ console.log(inputMetr);
   });
 
   //проверка вводимых дынных-ТОЛЬКО ЦИФРЫ
-  // inputMetr.addEventListener('input', (e) =>{
+  // panelBody.addEventListener('input', (e) =>{
   //   let target = e.target;
-  //   if(target.matches('metr')){
+  //   if(target.matches('.focus-visible')){
   //     target.value = target.value.replace(/\D/g, ''); // ограничиваем ввод всего кроме цифр
   //   }
   // });
-  
-  const SepticOneBeffor = 15000,//камера
-        SeptictwoAfter = 10000,
-        
-        oneBottom = 0.1,//днище
-        twoBottom = 0.2;
 
+  const countSum = () =>{  
+    const SepticOneBeffor = 15000,//камера
+          SeptictwoAfter = 10000;
 
-  inputChexbox.forEach((elem)=>{
-    elem.addEventListener('click', ()=>{
-        if(myonoffswitch.checked === true){
-          countSept = SeptictwoAfter;
-          hiddenSeptic.forEach((e) =>{
-            e.style.display = 'none';
-          })
-          console.log(countSept);
+    let countSept = 0,
+        calcResult = 0,
+        typeValue = 0;
 
-        }else if(myonoffswitch.checked === false){
-          countSept = SepticOneBeffor
-          hiddenSeptic.forEach((e) =>{
-            e.style.display = 'inline-block';
-          })
-          console.log(countSept);
-        }
+  const select = () =>{
+    inputChexbox.forEach((elem)=>{
+      elem.addEventListener('change', ()=>{
+          if(myonoffswitch.checked === true){
+            countSept = SeptictwoAfter;
+            calcResult = countSept;
+              calcResultInput.value = Math.floor(calcResult + (calcResult * typeValue) + (calcResult * typeValue));
+
+            hiddenSeptic.forEach((e) =>{
+              e.style.display = 'none';
+            })
+          }else if(myonoffswitch.checked === false){
+            countSept = SepticOneBeffor
+            calcResult = countSept;
+            calcResultInput.value = Math.floor(calcResult + (calcResult * typeValue) + (calcResult * typeValue) + (calcResult * typeValue) +(calcResult * typeValue));
+            hiddenSeptic.forEach((e) =>{
+              e.style.display = 'inline-block';
+            })
+          }
+        });
       });
+    };
+    formControl.forEach((elem) =>{
+      elem.addEventListener('click', ()=>{
+        typeValue = elem.options[elem.selectedIndex].value;//получаем наше value 
+        select();
+        console.log(typeValue);
+      })
+    });
+  }  ;    
+
+
+
+  panel.forEach((elem) =>{
+    elem.addEventListener('change', (e) =>{
+      let target = e.target;
+      if(target.matches('select') || target.matches('input')){
+        countSum();
+      }
+    });
   });
-  
+
 };
 export default calc;
