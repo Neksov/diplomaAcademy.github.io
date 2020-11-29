@@ -37,7 +37,7 @@ const calc = () =>{
           if(myonoffswitch.checked === true){
             countSept = SeptictwoAfter;
             calcResult = countSept;
-              calcResultInput.value = Math.floor(calcResult + (calcResult * typeValue) + (calcResult * typeValue));
+            calcResultInput.value = Math.floor(calcResult + (calcResult * typeValue) );
 
             hiddenSeptic.forEach((e) =>{
               e.style.display = 'none';
@@ -45,7 +45,7 @@ const calc = () =>{
           }else if(myonoffswitch.checked === false){
             countSept = SepticOneBeffor
             calcResult = countSept;
-            calcResultInput.value = Math.floor(calcResult + (calcResult * typeValue) + (calcResult * typeValue) + (calcResult * typeValue) +(calcResult * typeValue));
+            calcResultInput.value = Math.floor(calcResult + (calcResult * typeValue));
             hiddenSeptic.forEach((e) =>{
               e.style.display = 'inline-block';
             })
@@ -53,6 +53,7 @@ const calc = () =>{
         });
       });
     };
+
     formControl.forEach((elem) =>{
       elem.addEventListener('click', ()=>{
         typeValue = elem.options[elem.selectedIndex].value;//получаем наше value 
