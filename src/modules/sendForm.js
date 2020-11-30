@@ -32,10 +32,9 @@ const sendForm = () =>{
         let target = e.target;
         if(target.matches('[name=user_name]') || target.matches('[name=user_quest]')){
           target.value = target.value.replace(/[^а-яё\s]/ig, ''); // ограничиваем ввод всего кроме кирилицы
-        }else if(target.matches('.phone-user')){
+        }else if(target.matches('.phone-user') || target.matches('#distance')){
           target.value = target.value.replace(/[^0-9+]/ig, '').substring(0,12);
         }
-        
       });
     });
   
@@ -71,11 +70,13 @@ const sendForm = () =>{
           return;
         }
         load.classList.add('sk-spinner-pulse');//вывод спинер загрузка
-        popupDiscount.classList.add('calculator-data');
 
         const formData = new FormData(elem);//создаем экземпляр класса и в эту функцию передаем форму с которой получаем данные
+        
+        popupDiscount.classList.add('calculator-data');
 
         if(elem.closest('.calculator-data')){
+
           const construct = document.querySelectorAll('.calculator');
           construct.forEach((item) =>{
             formData.append(item.getAttribute('name'), item.value);
@@ -104,10 +105,10 @@ const sendForm = () =>{
           console.error(error); 
         });
 
-        popupDiscount.classList.remove('calculator-data');
         //очищаем поля
         cleaFields();
         statusMessage.textContent ='';
+
       });
     });
   
@@ -151,7 +152,6 @@ const sendForm = () =>{
       cleaFields();
       statusMessage.textContent ='';
     });
-
 
     directorForm.addEventListener('submit', (event) =>{
       event.preventDefault();//отменяем стандарное поведение браузера
