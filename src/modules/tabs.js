@@ -1,10 +1,7 @@
 const tabs = () =>{
   const panelGroup  = document.querySelectorAll('.panel-group'),
         panel = document.querySelectorAll('.panel'),
-        collapse = document.querySelectorAll('.collapse'),
-        constructBtn = document.querySelectorAll('.construct-btn'),
-        collapsed = document.querySelectorAll('.collapsed');
-
+        collapse = document.querySelectorAll('.collapse');
 
   const toggleTabContent = (index) =>{
     for(let i=0; i < panel.length; i++){
@@ -19,7 +16,6 @@ const tabs = () =>{
   };
 
   panelGroup.forEach((e) =>{
-    
     e.addEventListener('click', (event) =>{ 
       let target = event.target;
       target = target.closest('.panel'); 
@@ -32,14 +28,16 @@ const tabs = () =>{
       };
     });
 
-    e.addEventListener('click', (event) =>{ 
-      if (event.target.closest('.construct-btn')){
-        constructBtn.forEach((item, i ) =>{ 
-        if (item === event.target){
-          toggleTabContent(i+1);
-        }
-        });
-      };
+    e.addEventListener('click', (event) =>{
+      if (event.target.closest('.construct-btn')) {
+        const panelВefault = event.target.closest('.panel-default');
+        const panelСollapse = panelВefault.querySelector('.panel-collapse');
+        const nextBlock = panelВefault.nextSibling.nextSibling;
+        const nextBlockChild = nextBlock.querySelector('.panel-collapse');
+
+        panelСollapse.classList.remove('in');
+        nextBlockChild.classList.add('in');
+    }
     })
 
   });

@@ -1,78 +1,89 @@
-const calc = () =>{
-  const inputChexbox = document.querySelectorAll('[type=checkbox]'),
-        hiddenSeptic = document.querySelectorAll('.hiddenSeptic'),
-        formControl = document.querySelectorAll('.form-control'),
+// калькулятор
+const calc = () => {
+  const calculatorBlock = document.querySelector('.calculator-block'),
+      switchOne = document.getElementById('myonoffswitch'),
+      switchTwo = document.getElementById('myonoffswitch-two'),
+      secondWell = document.getElementById('second-well'),
+      calcResult = document.getElementById('calc-result'),
+      diameterOne = document.querySelector('.diameter-one'),
+      ringsOne = document.querySelector('.rings-one'),
+      diameterTwo = document.querySelector('.diameter-two'),
+      ringsTwo = document.querySelector('.rings-two');
 
-        panel = document.querySelectorAll('.panel'),
-        calcResultInput = document.getElementById('calc-result');
+  if (switchOne.checked) {
+    secondWell.style.display = 'none';
+    calcResult.value = 10000;
+    diameterTwo.classList.remove('calculator');
+    ringsTwo.classList.remove('calculator');
+  }
+  switchTwo.checked = false;
 
-  let myonoffswitch = document.getElementById('myonoffswitch'),
-      myonoffswitchTwo = document.getElementById('myonoffswitch-two');
+  const countSumm = () => {
+    let result = 0; // итоговая сумма
 
+    let diameterOneInd = diameterOne.options.selectedIndex, //выбранный диаметр первой камеры
+          ringsOneInd = ringsOne.options.selectedIndex, //кол-во колец первой камеры
+          diameterTwoInd = diameterTwo.options.selectedIndex, //выбранный диаметр второй камеры
+          ringsTwoInd = ringsTwo.options.selectedIndex; //кол-во колец первой камеры
 
-  //сразу убираем второй колодец    
-  hiddenSeptic.forEach((e) =>{ 
-    e.style.display = 'none';
+    if (switchOne && !switchOne.checked) { // выбрано две камеры
+      secondWell.style.display = 'block';
+      diameterTwo.classList.add('calculator');
+      ringsTwo.classList.add('calculator');
+      result = 15000;
+    } else if (switchOne && switchOne.checked) { // выбрана одна камера
+      secondWell.style.display = 'none';
+      diameterTwo.classList.remove('calculator');
+      ringsTwo.classList.remove('calculator');
+      result = 10000;
+    }
+
+    if (diameterOne && diameterOneInd === 0) {
+      result = result * 1; // диаметр 1й камеры 1,4 метра - цена не меняется
+    } else if (diameterOne && diameterOneInd === 1) {
+      result = result + (result * 0.2); // диаметр 1й камеры 2 метра - к цене прибавляется 20%
+    }
+
+    if (diameterTwo && diameterTwoInd === 0) {
+      result = result * 1; // диаметр 2й камеры 1,4 метра - цена не меняется
+    } else if (diameterTwo && diameterTwoInd === 1) {
+      result = result + (result * 0.2); // диаметр 2й камеры 2 метра - к цене прибавляется 20%
+    }
+
+    if (ringsOne && ringsOneInd === 0) {
+      result = result * 1; // одно кольцо у первой камеры - цена не меняется
+    } else if (ringsOne && ringsOneInd === 1) {
+      result = result + (10000 * 0.3); // 2 кольца у первой камеры - добавляется 30% от 10000
+    } else if (ringsOne && ringsOneInd === 2) {
+      result = result + (10000 * 0.5); // 3 кольца у первой камеры - добавляется 50% от 10000
+    }
+
+    if (ringsTwo && ringsTwoInd === 0) {
+      result = result * 1; // одно кольцо у 2й камеры - цена не меняется
+    } else if (ringsTwo && ringsTwoInd === 1) {
+      result = result + (5000 * 0.2); // 2 кольца у 2й камеры - добавляется 20% от 5000
+    } else if (ringsTwo && ringsTwoInd === 2) {
+      result = result + (5000 * 0.4); // 3 кольца у 2й камеры - добавляется 40% от 5000
+    }
+
+    if (switchTwo.checked && switchOne.checked) {
+      result = result + (result * 0.1); // выбрано днище - одна камера
+    } else if (switchTwo.checked && !switchOne.checked) {
+      result = result + (result * 0.2); // выбрано днище - две камеры
+    } else if (switchTwo && !switchTwo.checked) {
+      result = result ; // днище не выбрано
+    }
+
+    calcResult.value = result;
+  };
+  
+  calculatorBlock.addEventListener('change', (event) => {
+    let target = event.target;
+
+    if(target.matches('select') || target.matches('input')){
+      countSumm();
+    }
   });
-
-  //проверка вводимых дынных-ТОЛЬКО ЦИФРЫ
-  // panelBody.addEventListener('input', (e) =>{
-  //   let target = e.target;
-  //   if(target.matches('.focus-visible')){
-  //     target.value = target.value.replace(/\D/g, ''); // ограничиваем ввод всего кроме цифр
-  //   }
-  // });
-
-  const countSum = () =>{  
-    const SepticOneBeffor = 15000,//камера
-          SeptictwoAfter = 10000;
-
-    let countSept = 0,
-        calcResult = 0,
-        typeValue = 0;
-
-  const select = () =>{
-    inputChexbox.forEach((elem)=>{
-      elem.addEventListener('change', ()=>{
-          if(myonoffswitch.checked === true){
-            countSept = SeptictwoAfter;
-            calcResult = countSept;
-            calcResultInput.value = Math.floor(calcResult + (calcResult * typeValue) );
-
-            hiddenSeptic.forEach((e) =>{
-              e.style.display = 'none';
-            })
-          }else if(myonoffswitch.checked === false){
-            countSept = SepticOneBeffor
-            calcResult = countSept;
-            calcResultInput.value = Math.floor(calcResult + (calcResult * typeValue));
-            hiddenSeptic.forEach((e) =>{
-              e.style.display = 'inline-block';
-            })
-          }
-        });
-      });
-    };
-
-    formControl.forEach((elem) =>{
-      elem.addEventListener('click', ()=>{
-        typeValue = elem.options[elem.selectedIndex].value;//получаем наше value 
-        select();
-        console.log(typeValue);
-      })
-    });
-  }  ;    
-
-
-
-  panel.forEach((elem) =>{
-    elem.addEventListener('change', (e) =>{
-      let target = e.target;
-      if(target.matches('select') || target.matches('input')){
-        countSum();
-      }
-    });
-  });
-
 };
+
 export default calc;
