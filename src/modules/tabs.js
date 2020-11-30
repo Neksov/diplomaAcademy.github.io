@@ -31,9 +31,9 @@ const tabs = () =>{
     e.addEventListener('click', (event) =>{
       if (event.target.closest('.construct-btn')) {
         const panelВefault = event.target.closest('.panel-default');
-        const panelСollapse = panelВefault.querySelector('.panel-collapse');
+        const panelСollapse = panelВefault.querySelector('.collapse');
         const nextBlock = panelВefault.nextSibling.nextSibling;
-        const nextBlockChild = nextBlock.querySelector('.panel-collapse');
+        const nextBlockChild = nextBlock.querySelector('.collapse');
 
         panelСollapse.classList.remove('in');
         nextBlockChild.classList.add('in');

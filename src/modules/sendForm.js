@@ -11,7 +11,6 @@ const sendForm = () =>{
         phone13 = document.getElementById('phone_13'),
         phone2 = document.getElementById('phone_2'),
         phone3 = document.getElementById('phone_3'),
-
         input = document.querySelectorAll('input'),
         phoneUser = document.querySelectorAll('input[name="user_phone'),
         userName = document.querySelectorAll('[name=user_name]'),
@@ -19,14 +18,11 @@ const sendForm = () =>{
         popupDiscount = document.querySelector('.popup-discount'),
         popupCheck = document.querySelector('.popup-check'),
         quest = document.querySelector('#quest'),
-        // sum = document.querySelector('#sum'),
-
         popupConsultation = document.querySelector('.popup-consultation'),
         userQuest = document.querySelector('[name=user_quest]');
 
   let statusMessage = document.createElement('div'),//добавялем элемент на страницу
       load = document.createElement('div');
-      // calcResult = document.querySelector('#calc-result');
 
     statusMessage.style.cssText = 'font-size: 2rem;'; //стилизуем статус сообщения
     statusMessage.style.cssText = 'color: black;'; 
@@ -68,28 +64,30 @@ const sendForm = () =>{
         event.preventDefault();//отменяем стандарное поведение браузера
         elem.appendChild(statusMessage);// добавляем элемент на страницу    
         elem.appendChild(load);
-
-        // let sum2 = calcResult.value;
-        // console.log(sum2)
-        //     sum.value = sum2;
-
         //проверяем введенный номер
         if(!phone1.value.match(/[0-9+]{7,12}/ig) && !phone11.value.match(/[0-9+]{7,12}/ig) && !phone12.value.match(/[0-9+]{7,12}/ig) && !phone13.value.match(/[0-9+]{7,12}/ig) && !phone2.value.match(/[0-9+]{7,12}/ig)) {
           alert('Номер введен не верно, повторите');
           statusMessage.remove();//удаляем сообщение под формой
           return;
         }
-
         load.classList.add('sk-spinner-pulse');//вывод спинер загрузка
-        
+        popupDiscount.classList.add('calculator-data');
+
         const formData = new FormData(elem);//создаем экземпляр класса и в эту функцию передаем форму с которой получаем данные
+
+        if(elem.closest('.calculator-data')){
+          const construct = document.querySelectorAll('.calculator');
+          construct.forEach((item) =>{
+            formData.append(item.getAttribute('name'), item.value);
+          });
+        };
+
         let body = {}; //обект в который помещаем наши данные
 
         //для отправки JSON перебираем и записываем каждый цикл
         formData.forEach((val, key) =>{
             body[key] = val;
         });
-
         postData(body) 
         .then((response) =>{
           if(response.status !==200){
@@ -106,6 +104,7 @@ const sendForm = () =>{
           console.error(error); 
         });
 
+        popupDiscount.classList.remove('calculator-data');
         //очищаем поля
         cleaFields();
         statusMessage.textContent ='';
@@ -153,6 +152,7 @@ const sendForm = () =>{
       statusMessage.textContent ='';
     });
 
+
     directorForm.addEventListener('submit', (event) =>{
       event.preventDefault();//отменяем стандарное поведение браузера
       let questions = userQuest.value; //берем значения с инпута вопрос
@@ -170,6 +170,7 @@ const sendForm = () =>{
         credentials: 'include' //проверка подлинности
       });
     };
+
 };
 
 export default sendForm;
