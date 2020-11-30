@@ -1500,6 +1500,6 @@ header .logo img {
     opacity: 0;
   }
 }
-#quest{
+#quest, #sum{
   display: none;
 }

@@ -4,7 +4,7 @@ const sendForm = () =>{
 
   const captureForm = document.querySelectorAll('.capture-form'),//форма с pop-up 
         mainForm = document.querySelector('.main-form'),// форма консультация
-
+        directorForm = document.querySelector('.director-form'),// форма вопрос
         phone1 = document.getElementById('phone_1'),
         phone11 = document.getElementById('phone_11'),
         phone12 = document.getElementById('phone_12'),
@@ -20,8 +20,8 @@ const sendForm = () =>{
         popupCheck = document.querySelector('.popup-check'),
         quest = document.querySelector('#quest'),
         popupConsultation = document.querySelector('.popup-consultation'),
-        userQuest = document.querySelector('[name=user_quest]');
-        // calcResult = document.querySelector('.calc-result');
+        userQuest = document.querySelector('[name=user_quest]'),
+        calcResult = document.querySelector('.calc-result');
 
   let statusMessage = document.createElement('div'),//добавялем элемент на страницу
       load = document.createElement('div');
@@ -67,8 +67,8 @@ const sendForm = () =>{
         elem.appendChild(statusMessage);// добавляем элемент на страницу    
         elem.appendChild(load);
 
-        let questions = userQuest.value; //берем значения с инпута вопрос
-        quest.value = questions;
+        // sum2 = calcResult.value
+        // sum.value = sum2;
 
         //проверяем введенный номер
         if(!phone1.value.match(/[0-9+]{7,12}/ig) && !phone11.value.match(/[0-9+]{7,12}/ig) && !phone12.value.match(/[0-9+]{7,12}/ig) && !phone13.value.match(/[0-9+]{7,12}/ig) && !phone2.value.match(/[0-9+]{7,12}/ig)) {
@@ -148,6 +148,12 @@ const sendForm = () =>{
       //очищаем поля
       cleaFields();
       statusMessage.textContent ='';
+    });
+
+    directorForm.addEventListener('submit', (event) =>{
+      event.preventDefault();//отменяем стандарное поведение браузера
+      let questions = userQuest.value; //берем значения с инпута вопрос
+      quest.value = questions;
     });
 
     const postData = (body) =>{
