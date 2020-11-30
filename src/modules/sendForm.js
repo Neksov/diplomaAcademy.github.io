@@ -108,6 +108,7 @@ const sendForm = () =>{
         //очищаем поля
         cleaFields();
         statusMessage.textContent ='';
+        popupDiscount.classList.remove('calculator-data');
 
       });
     });
