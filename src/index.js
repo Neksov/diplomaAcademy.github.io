@@ -18,7 +18,7 @@ import showAll from './modules/showAll';
 import tabs from './modules/tabs';
 import sendForm from './modules/sendForm';
 import calc from './modules/calc';
-
+// import WOW from 'wow-animation/wow';
 
 //popup
 togglePopUp();
@@ -31,4 +31,4 @@ sendForm();
 //calc
 calc();
 
-new WOW().init();
+// new WOW().init();
