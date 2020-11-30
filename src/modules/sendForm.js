@@ -113,7 +113,6 @@ const sendForm = () =>{
         numders.value = '';
         calcResult.value = '';
         popupDiscount.classList.remove('calculator-data');
-
       });
     });
   
