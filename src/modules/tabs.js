@@ -29,7 +29,7 @@ const tabs = () =>{
     });
 
     e.addEventListener('click', (event) =>{
-      if (event.target.closest('.construct-btn')) {
+      if (event.target.closest('.construct-btn2')) {
         const panelВefault = event.target.closest('.panel-default');
         const panelСollapse = panelВefault.querySelector('.collapse');
         const nextBlock = panelВefault.nextSibling.nextSibling;

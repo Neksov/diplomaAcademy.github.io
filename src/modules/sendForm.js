@@ -88,7 +88,7 @@ const sendForm = () =>{
         formData.forEach((val, key) =>{
             body[key] = val;
         });
-        postData(body) 
+        postData(body)
         .then((response) =>{
           if(response.status !==200){
             throw new Error('status network not 200');
