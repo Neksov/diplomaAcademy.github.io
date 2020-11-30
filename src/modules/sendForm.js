@@ -19,13 +19,15 @@ const sendForm = () =>{
         popupDiscount = document.querySelector('.popup-discount'),
         popupCheck = document.querySelector('.popup-check'),
         quest = document.querySelector('#quest'),
+        // sum = document.querySelector('#sum'),
+
         popupConsultation = document.querySelector('.popup-consultation'),
-        userQuest = document.querySelector('[name=user_quest]'),
-        calcResult = document.querySelector('.calc-result');
+        userQuest = document.querySelector('[name=user_quest]');
 
   let statusMessage = document.createElement('div'),//добавялем элемент на страницу
       load = document.createElement('div');
-  
+      // calcResult = document.querySelector('#calc-result');
+
     statusMessage.style.cssText = 'font-size: 2rem;'; //стилизуем статус сообщения
     statusMessage.style.cssText = 'color: black;'; 
 
@@ -67,8 +69,9 @@ const sendForm = () =>{
         elem.appendChild(statusMessage);// добавляем элемент на страницу    
         elem.appendChild(load);
 
-        // sum2 = calcResult.value
-        // sum.value = sum2;
+        // let sum2 = calcResult.value;
+        // console.log(sum2)
+        //     sum.value = sum2;
 
         //проверяем введенный номер
         if(!phone1.value.match(/[0-9+]{7,12}/ig) && !phone11.value.match(/[0-9+]{7,12}/ig) && !phone12.value.match(/[0-9+]{7,12}/ig) && !phone13.value.match(/[0-9+]{7,12}/ig) && !phone2.value.match(/[0-9+]{7,12}/ig)) {
