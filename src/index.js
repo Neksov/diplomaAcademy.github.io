@@ -30,5 +30,3 @@ tabs();
 sendForm();
 //calc
 calc();
-
-// new WOW().init();

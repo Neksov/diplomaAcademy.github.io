@@ -19,6 +19,8 @@ const sendForm = () =>{
         popupCheck = document.querySelector('.popup-check'),
         quest = document.querySelector('#quest'),
         popupConsultation = document.querySelector('.popup-consultation'),
+        numders  = document.querySelector('.numders '),
+        calcResult = document.getElementById('calc-result'),
         userQuest = document.querySelector('[name=user_quest]');
 
   let statusMessage = document.createElement('div'),//добавялем элемент на страницу
@@ -108,6 +110,8 @@ const sendForm = () =>{
         //очищаем поля
         cleaFields();
         statusMessage.textContent ='';
+        numders.value = '';
+        calcResult.value = '';
         popupDiscount.classList.remove('calculator-data');
 
       });
