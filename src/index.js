@@ -31,4 +31,4 @@ sendForm();
 //calc
 calc();
 
-// new WOW().init();
+new WOW().init();
