@@ -4,7 +4,6 @@ const sendForm = () =>{
 
   const captureForm = document.querySelectorAll('.capture-form'),//форма с pop-up 
         mainForm = document.querySelector('.main-form'),// форма консультация
-        directorForm = document.querySelector('.director-form'),// форма вопроса
 
         phone1 = document.getElementById('phone_1'),
         phone11 = document.getElementById('phone_11'),
@@ -15,15 +14,17 @@ const sendForm = () =>{
 
         input = document.querySelectorAll('input'),
         phoneUser = document.querySelectorAll('input[name="user_phone'),
-        userQuest = document.querySelector('[name=user_quest]'),
         userName = document.querySelectorAll('[name=user_name]'),
         popupCall = document.querySelector('.popup-call'),
         popupDiscount = document.querySelector('.popup-discount'),
         popupCheck = document.querySelector('.popup-check'),
-        popupConsultation = document.querySelector('.popup-consultation');
+        quest = document.querySelector('#quest'),
+        popupConsultation = document.querySelector('.popup-consultation'),
+        userQuest = document.querySelector('[name=user_quest]');
+        // calcResult = document.querySelector('.calc-result');
 
-let statusMessage = document.createElement('div'),//добавялем элемент на страницу
-    load = document.createElement('div');
+  let statusMessage = document.createElement('div'),//добавялем элемент на страницу
+      load = document.createElement('div');
   
     statusMessage.style.cssText = 'font-size: 2rem;'; //стилизуем статус сообщения
     statusMessage.style.cssText = 'color: black;'; 
@@ -66,7 +67,10 @@ let statusMessage = document.createElement('div'),//добавялем элем�
         elem.appendChild(statusMessage);// добавляем элемент на страницу    
         elem.appendChild(load);
 
-        //проанряем введенный номер
+        let questions = userQuest.value; //берем значения с инпута вопрос
+        quest.value = questions;
+
+        //проверяем введенный номер
         if(!phone1.value.match(/[0-9+]{7,12}/ig) && !phone11.value.match(/[0-9+]{7,12}/ig) && !phone12.value.match(/[0-9+]{7,12}/ig) && !phone13.value.match(/[0-9+]{7,12}/ig) && !phone2.value.match(/[0-9+]{7,12}/ig)) {
           alert('Номер введен не верно, повторите');
           statusMessage.remove();//удаляем сообщение под формой
@@ -80,7 +84,7 @@ let statusMessage = document.createElement('div'),//добавялем элем�
 
         //для отправки JSON перебираем и записываем каждый цикл
         formData.forEach((val, key) =>{
-          body[key] = val;
+            body[key] = val;
         });
 
         postData(body) 
@@ -144,30 +148,6 @@ let statusMessage = document.createElement('div'),//добавялем элем�
       //очищаем поля
       cleaFields();
       statusMessage.textContent ='';
-    });
-
-    directorForm.addEventListener('submit', (event) =>{
-      event.preventDefault();//отменяем стандарное поведение браузера
-      const formData = new FormData(directorForm);//создаем экземпляр класса и в эту функцию передаем форму с которой получаем данные
-      let body = {}; //обект в который помещаем наши данные
-
-      //для отправки JSON перебираем и записываем каждый цикл
-      formData.forEach((val, key) =>{
-        body[key] = val;
-      });
-
-      postData(body) 
-      .then((response) =>{
-        if(response.status !==200){
-          throw new Error('status network not 200');
-        }
-      })
-      .catch((error) =>{
-        console.error(error); 
-      });
-
-      //очищаем поля
-      cleaFields();
     });
 
     const postData = (body) =>{

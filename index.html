@@ -266,7 +266,8 @@
                                 aria-labelledby="headingFour">
                                 <div class="panel-body">
                                     <p>Введите расстояние до дома</p>
-                                    <input type="text metr">
+                                    <input id="distance" class="numders calculator" type="text" name="calc-dist-home"
+                                        required>
                                     <button class="button construct-btn call-btn">Получить расчет и скидку</button>
                                 </div>
                             </div>
@@ -577,6 +578,8 @@
                     <label for="phone_13">Ваш телефон для получения скидки</label>
                     <input class="phone-user" type="text" id="phone_13" name="user_phone" placeholder="+7(___)___-__-__"
                         required>
+                    <input type='text' name="quest" id='quest'>
+
                     <button class="button capture-form-btn" name="submit" type="submit">Получить консультацию</button>
                     <p class="small">Вы получите расчет стоимости с учетом выбора <br>подходящего объема септика. типа
                         грунта, <br> расположения объектов на участке, уровня грунтовых <br> вод, типа фундамента дома и
